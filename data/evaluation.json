@@ -1,0 +1,69 @@
+{
+  "modelVersion": "saned-if-20261016-v1",
+  "artifactSha256": "c5fb4c8b78cf0b2ff4e7934ef0d50a76eae2afcc75c0d268eb2f09aafabe9aaf",
+  "validation": "Provisional synthetic scenario labels; Haitham review pending",
+  "train": 2400,
+  "calibration": 800,
+  "test": 600,
+  "normal": 300,
+  "review": 300,
+  "threshold": 0.6200281595573496,
+  "thresholdMethod": "97th percentile of independent normal calibration cases, fixed before test evaluation",
+  "splitMethod": "Disjoint synthetic claimant IDs, generated sequentially with a fixed seed; no real-world generalisation claim",
+  "metrics": {
+    "Rules only": {
+      "tp": 200,
+      "fp": 14,
+      "fn": 100,
+      "tn": 286,
+      "precision": 0.9345794392523364,
+      "recall": 0.6666666666666666,
+      "falsePositiveRate": 0.04666666666666667
+    },
+    "Isolation Forest only": {
+      "tp": 221,
+      "fp": 16,
+      "fn": 79,
+      "tn": 284,
+      "precision": 0.9324894514767933,
+      "recall": 0.7366666666666667,
+      "falsePositiveRate": 0.05333333333333334
+    },
+    "Rules + Isolation Forest": {
+      "tp": 300,
+      "fp": 27,
+      "fn": 0,
+      "tn": 273,
+      "precision": 0.9174311926605505,
+      "recall": 1.0,
+      "falsePositiveRate": 0.09
+    }
+  },
+  "byScenario": {
+    "coordinated": {
+      "count": 100,
+      "mlFlagged": 100,
+      "ruleFlagged": 0
+    },
+    "legitimate_surge": {
+      "count": 60,
+      "mlFlagged": 13,
+      "ruleFlagged": 14
+    },
+    "retroactive": {
+      "count": 100,
+      "mlFlagged": 100,
+      "ruleFlagged": 100
+    },
+    "routine": {
+      "count": 240,
+      "mlFlagged": 3,
+      "ruleFlagged": 0
+    },
+    "wage": {
+      "count": 100,
+      "mlFlagged": 21,
+      "ruleFlagged": 100
+    }
+  }
+}

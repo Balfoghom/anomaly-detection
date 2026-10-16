@@ -1,0 +1,370 @@
+[
+  {
+    "caseId": "SYN-demo-00000",
+    "scenario": "routine",
+    "synthetic": true,
+    "validation": "Haitham review pending",
+    "modelVersion": "saned-if-20261016-v1",
+    "complete": true,
+    "score": 0.5005322058161524,
+    "percentile": 60.375,
+    "modelFlagged": false,
+    "ruleFlagged": false,
+    "ruleReasons": [],
+    "route": "Standard review",
+    "band": "Typical",
+    "features": [
+      {
+        "name": "Amendments in 30 days",
+        "value": 1,
+        "median": 1,
+        "low": 0,
+        "high": 3,
+        "unusual": false
+      },
+      {
+        "name": "Maximum backdating (days)",
+        "value": 0,
+        "median": 2,
+        "low": 0,
+        "high": 8,
+        "unusual": false
+      },
+      {
+        "name": "Hours since last amendment",
+        "value": 399.7694833333333,
+        "median": 482.0510663460136,
+        "low": 73.78698405382079,
+        "high": 720.0001622612529,
+        "unusual": false
+      },
+      {
+        "name": "Wage change (%)",
+        "value": 8.517666666666667,
+        "median": 4.217166900634766,
+        "low": -6.787291526794434,
+        "high": 16.592575073242188,
+        "unusual": false
+      },
+      {
+        "name": "Employer exclusions / 100 workers",
+        "value": 5.882352941176471,
+        "median": 4.081632614135742,
+        "low": 0.4029848277568817,
+        "high": 23.640987396240234,
+        "unusual": false
+      },
+      {
+        "name": "Supervisor changes / 100 workers",
+        "value": 0,
+        "median": 2.550297737121582,
+        "low": 0.2411167472600937,
+        "high": 4.727395534515381,
+        "unusual": true
+      }
+    ],
+    "reasons": [
+      "The trained forest did not flag this combination at the selected threshold."
+    ],
+    "explanationBoundary": "Feature ranges provide context, not causal explanations or exact model contributions."
+  },
+  {
+    "caseId": "SYN-demo-00001",
+    "scenario": "retroactive",
+    "synthetic": true,
+    "validation": "Haitham review pending",
+    "modelVersion": "saned-if-20261016-v1",
+    "complete": true,
+    "score": 0.6792435686865899,
+    "percentile": 99.875,
+    "modelFlagged": true,
+    "ruleFlagged": true,
+    "ruleReasons": [
+      "Four or more claimant amendments in 30 days",
+      "Backdating of 30 days or more"
+    ],
+    "route": "Specialist review",
+    "band": "Review",
+    "features": [
+      {
+        "name": "Amendments in 30 days",
+        "value": 5,
+        "median": 1,
+        "low": 0,
+        "high": 3,
+        "unusual": true
+      },
+      {
+        "name": "Maximum backdating (days)",
+        "value": 70,
+        "median": 2,
+        "low": 0,
+        "high": 8,
+        "unusual": true
+      },
+      {
+        "name": "Hours since last amendment",
+        "value": 7.193450277777777,
+        "median": 482.0510663460136,
+        "low": 73.78698405382079,
+        "high": 720.0001622612529,
+        "unusual": true
+      },
+      {
+        "name": "Wage change (%)",
+        "value": 13.183333333333325,
+        "median": 4.217166900634766,
+        "low": -6.787291526794434,
+        "high": 16.592575073242188,
+        "unusual": false
+      },
+      {
+        "name": "Employer exclusions / 100 workers",
+        "value": 1.6997167138810199,
+        "median": 4.081632614135742,
+        "low": 0.4029848277568817,
+        "high": 23.640987396240234,
+        "unusual": false
+      },
+      {
+        "name": "Supervisor changes / 100 workers",
+        "value": 0.56657223796034,
+        "median": 2.550297737121582,
+        "low": 0.2411167472600937,
+        "high": 4.727395534515381,
+        "unusual": false
+      }
+    ],
+    "reasons": [
+      "The trained forest finds this combination unusual relative to its synthetic reference population.",
+      "Four or more claimant amendments in 30 days",
+      "Backdating of 30 days or more"
+    ],
+    "explanationBoundary": "Feature ranges provide context, not causal explanations or exact model contributions."
+  },
+  {
+    "caseId": "SYN-demo-00002",
+    "scenario": "coordinated",
+    "synthetic": true,
+    "validation": "Haitham review pending",
+    "modelVersion": "saned-if-20261016-v1",
+    "complete": true,
+    "score": 0.7182255679522174,
+    "percentile": 100,
+    "modelFlagged": true,
+    "ruleFlagged": false,
+    "ruleReasons": [],
+    "route": "Specialist review",
+    "band": "Review",
+    "features": [
+      {
+        "name": "Amendments in 30 days",
+        "value": 3,
+        "median": 1,
+        "low": 0,
+        "high": 3,
+        "unusual": false
+      },
+      {
+        "name": "Maximum backdating (days)",
+        "value": 15,
+        "median": 2,
+        "low": 0,
+        "high": 8,
+        "unusual": true
+      },
+      {
+        "name": "Hours since last amendment",
+        "value": 3.7819255555555555,
+        "median": 482.0510663460136,
+        "low": 73.78698405382079,
+        "high": 720.0001622612529,
+        "unusual": true
+      },
+      {
+        "name": "Wage change (%)",
+        "value": 33.475333333333346,
+        "median": 4.217166900634766,
+        "low": -6.787291526794434,
+        "high": 16.592575073242188,
+        "unusual": true
+      },
+      {
+        "name": "Employer exclusions / 100 workers",
+        "value": 19.047619047619047,
+        "median": 4.081632614135742,
+        "low": 0.4029848277568817,
+        "high": 23.640987396240234,
+        "unusual": false
+      },
+      {
+        "name": "Supervisor changes / 100 workers",
+        "value": 15.873015873015873,
+        "median": 2.550297737121582,
+        "low": 0.2411167472600937,
+        "high": 4.727395534515381,
+        "unusual": true
+      }
+    ],
+    "reasons": [
+      "The trained forest finds this combination unusual relative to its synthetic reference population."
+    ],
+    "explanationBoundary": "Feature ranges provide context, not causal explanations or exact model contributions."
+  },
+  {
+    "caseId": "SYN-demo-00003",
+    "scenario": "legitimate_surge",
+    "synthetic": true,
+    "validation": "Haitham review pending",
+    "modelVersion": "saned-if-20261016-v1",
+    "complete": true,
+    "score": 0.6255694499737549,
+    "percentile": 97.375,
+    "modelFlagged": true,
+    "ruleFlagged": false,
+    "ruleReasons": [],
+    "route": "Specialist review",
+    "band": "Review",
+    "features": [
+      {
+        "name": "Amendments in 30 days",
+        "value": 2,
+        "median": 1,
+        "low": 0,
+        "high": 3,
+        "unusual": false
+      },
+      {
+        "name": "Maximum backdating (days)",
+        "value": 8,
+        "median": 2,
+        "low": 0,
+        "high": 8,
+        "unusual": false
+      },
+      {
+        "name": "Hours since last amendment",
+        "value": 536.4141933333333,
+        "median": 482.0510663460136,
+        "low": 73.78698405382079,
+        "high": 720.0001622612529,
+        "unusual": false
+      },
+      {
+        "name": "Wage change (%)",
+        "value": 13.42133333333333,
+        "median": 4.217166900634766,
+        "low": -6.787291526794434,
+        "high": 16.592575073242188,
+        "unusual": false
+      },
+      {
+        "name": "Employer exclusions / 100 workers",
+        "value": 31.35593220338983,
+        "median": 4.081632614135742,
+        "low": 0.4029848277568817,
+        "high": 23.640987396240234,
+        "unusual": true
+      },
+      {
+        "name": "Supervisor changes / 100 workers",
+        "value": 3.389830508474576,
+        "median": 2.550297737121582,
+        "low": 0.2411167472600937,
+        "high": 4.727395534515381,
+        "unusual": false
+      }
+    ],
+    "reasons": [
+      "The trained forest finds this combination unusual relative to its synthetic reference population."
+    ],
+    "explanationBoundary": "Feature ranges provide context, not causal explanations or exact model contributions."
+  },
+  {
+    "caseId": "SYN-demo-00004",
+    "scenario": "wage",
+    "synthetic": true,
+    "validation": "Haitham review pending",
+    "modelVersion": "saned-if-20261016-v1",
+    "complete": true,
+    "score": 0.6045247369094551,
+    "percentile": 95.125,
+    "modelFlagged": false,
+    "ruleFlagged": true,
+    "ruleReasons": [
+      "Wage increase of 80% or more"
+    ],
+    "route": "Specialist review",
+    "band": "Review",
+    "features": [
+      {
+        "name": "Amendments in 30 days",
+        "value": 1,
+        "median": 1,
+        "low": 0,
+        "high": 3,
+        "unusual": false
+      },
+      {
+        "name": "Maximum backdating (days)",
+        "value": 1,
+        "median": 2,
+        "low": 0,
+        "high": 8,
+        "unusual": false
+      },
+      {
+        "name": "Hours since last amendment",
+        "value": 13.215371944444444,
+        "median": 482.0510663460136,
+        "low": 73.78698405382079,
+        "high": 720.0001622612529,
+        "unusual": true
+      },
+      {
+        "name": "Wage change (%)",
+        "value": 85.52783333333333,
+        "median": 4.217166900634766,
+        "low": -6.787291526794434,
+        "high": 16.592575073242188,
+        "unusual": true
+      },
+      {
+        "name": "Employer exclusions / 100 workers",
+        "value": 6.8119891008174385,
+        "median": 4.081632614135742,
+        "low": 0.4029848277568817,
+        "high": 23.640987396240234,
+        "unusual": false
+      },
+      {
+        "name": "Supervisor changes / 100 workers",
+        "value": 0.2724795640326976,
+        "median": 2.550297737121582,
+        "low": 0.2411167472600937,
+        "high": 4.727395534515381,
+        "unusual": false
+      }
+    ],
+    "reasons": [
+      "The trained forest did not flag this combination at the selected threshold.",
+      "Wage increase of 80% or more"
+    ],
+    "explanationBoundary": "Feature ranges provide context, not causal explanations or exact model contributions."
+  },
+  {
+    "caseId": "SYN-demo-00005",
+    "scenario": "missing",
+    "synthetic": true,
+    "validation": "Haitham review pending",
+    "modelVersion": "saned-if-20261016-v1",
+    "complete": false,
+    "route": "Complete evidence",
+    "band": "Incomplete",
+    "percentile": null,
+    "reasons": [
+      "Required workforce or event evidence is missing. No model score was produced."
+    ],
+    "features": []
+  }
+]
