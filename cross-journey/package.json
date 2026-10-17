@@ -1,0 +1,12 @@
+{
+  "name": "madar-cross-journey-detection",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "demo": "node demo.mjs",
+    "start": "node server.mjs"
+  }
+}

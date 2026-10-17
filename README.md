@@ -118,3 +118,9 @@ The supplied model can be used without retraining. Preserve its fingerprint and 
 - **User + AI workstream:** own synthetic scenario generation, feature definitions, model training, comparisons, limitations and the next evaluation after Haitham's review.
 
 See `INTEGRATION.md` for the request/response contract and `DEMO.md` for a short review sequence. The original application source is unchanged. An earlier separate `saned-prototype` UI draft is unintegrated and unpublished; the AI deliverable is this directory.
+
+For the consolidated application handover, including the cross-journey upload schema and acceptance tests, use `MANAL_HANDOVER.md`.
+
+## Cross-journey proof
+
+The `cross-journey/` directory contains a separate connected-entity proof spanning Employer Registration, Contribution & Wage, and SANED. It preserves this SANED Isolation Forest as the baseline and adds a supervised synthetic pattern model, event-level Data Intake files, evaluation, tests, and Manal's integration contract. Its business labels remain pending Haitham's validation.

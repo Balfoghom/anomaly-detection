@@ -1,0 +1,77 @@
+{
+  "modelVersion": "madar-cross-journey-rf-20261017-v1",
+  "artifactSha256": "c37a38f9cc7a7f815f8b4ea9c0d970f27d98c1e2c94ccf282864306cb1132ed9",
+  "validation": "Supervised with provisional synthetic cross-journey labels; Haitham review pending",
+  "train": 6700,
+  "calibration": 1000,
+  "test": 700,
+  "routineOrLegitimate": 400,
+  "review": 300,
+  "threshold": 0.00038115594062715477,
+  "thresholdMethod": "97th percentile of a separate routine and legitimate calibration population",
+  "splitMethod": "Disjoint synthetic case, employer, contributor, and identifier IDs; common generator; no real-world generalisation claim",
+  "metrics": {
+    "Provisional rules only": {
+      "tp": 150,
+      "fp": 0,
+      "fn": 150,
+      "tn": 400,
+      "accuracy": 0.7857142857142857,
+      "precision": 1.0,
+      "recall": 0.5,
+      "falsePositiveRate": 0.0
+    },
+    "Cross-journey pattern model only": {
+      "tp": 300,
+      "fp": 16,
+      "fn": 0,
+      "tn": 384,
+      "accuracy": 0.9771428571428571,
+      "precision": 0.9493670886075949,
+      "recall": 1.0,
+      "falsePositiveRate": 0.04
+    },
+    "Rules OR cross-journey AI": {
+      "tp": 300,
+      "fp": 16,
+      "fn": 0,
+      "tn": 384,
+      "accuracy": 0.9771428571428571,
+      "precision": 0.9493670886075949,
+      "recall": 1.0,
+      "falsePositiveRate": 0.04
+    }
+  },
+  "byScenario": {
+    "routine": {
+      "count": 250,
+      "aiFlagged": 5,
+      "ruleFlagged": 0
+    },
+    "legitimate_growth": {
+      "count": 75,
+      "aiFlagged": 11,
+      "ruleFlagged": 0
+    },
+    "legitimate_restructuring": {
+      "count": 75,
+      "aiFlagged": 0,
+      "ruleFlagged": 0
+    },
+    "coordinated_claim_sequence": {
+      "count": 150,
+      "aiFlagged": 150,
+      "ruleFlagged": 0
+    },
+    "identifier_reuse_network": {
+      "count": 75,
+      "aiFlagged": 75,
+      "ruleFlagged": 75
+    },
+    "retroactive_source_conflict": {
+      "count": 75,
+      "aiFlagged": 75,
+      "ruleFlagged": 75
+    }
+  }
+}

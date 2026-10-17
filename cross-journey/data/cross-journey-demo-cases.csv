@@ -1,0 +1,7 @@
+case_id,family,expected_review_provisional,business_validation_status,primary_journey,employer_id,event_count,journey_count,synthetic
+CJ-SYN-demo-00000,routine,0,Pending Haitham review,SANED,EMP-SYN-demo-00000,7,3,1
+CJ-SYN-demo-00001,coordinated_claim_sequence,1,Pending Haitham review,SANED,EMP-SYN-demo-00001,12,3,1
+CJ-SYN-demo-00002,legitimate_restructuring,0,Pending Haitham review,SANED,EMP-SYN-demo-00002,4,2,1
+CJ-SYN-demo-00003,identifier_reuse_network,1,Pending Haitham review,SANED,EMP-SYN-demo-00003,7,2,1
+CJ-SYN-demo-00004,retroactive_source_conflict,1,Pending Haitham review,SANED,EMP-SYN-demo-00004,4,3,1
+CJ-SYN-demo-00005,missing,0,Pending Haitham review,SANED,,1,,1
