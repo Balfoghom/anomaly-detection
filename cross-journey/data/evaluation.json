@@ -1,7 +1,7 @@
 {
   "modelVersion": "madar-cross-journey-rf-20261017-v1",
   "artifactSha256": "c37a38f9cc7a7f815f8b4ea9c0d970f27d98c1e2c94ccf282864306cb1132ed9",
-  "validation": "Supervised with provisional synthetic cross-journey labels; Haitham review pending",
+  "validation": "Business typology confirmed by Haitham; exact synthetic labels and threshold remain prototype assumptions",
   "train": 6700,
   "calibration": 1000,
   "test": 700,

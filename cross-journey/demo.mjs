@@ -6,7 +6,7 @@ const output = cases.map((caseRecord) => ({
   caseId: caseRecord.id,
   scenario: caseRecord.family,
   synthetic: true,
-  businessValidation: "Pending Haitham review",
+  businessValidation: "Business pattern confirmed; model threshold remains a prototype assumption",
   ...assess(caseRecord),
 }));
 

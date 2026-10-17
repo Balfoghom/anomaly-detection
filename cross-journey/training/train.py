@@ -411,7 +411,9 @@ def write_demo_csvs(cases):
                             "retroactive_source_conflict",
                         }
                     ),
-                    "business_validation_status": "Pending Haitham review",
+                    "business_validation_status": (
+                        "Business pattern confirmed; model threshold remains a prototype assumption"
+                    ),
                     "primary_journey": "SANED",
                     "employer_id": case.get("employerId") or "",
                     "event_count": len(case["events"]),

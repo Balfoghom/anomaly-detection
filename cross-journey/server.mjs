@@ -23,7 +23,7 @@ export function createInferenceServer() {
       return send(200, {
         service: "Madar cross-journey detection prototype",
         syntheticOnly: true,
-        businessValidation: "Pending Haitham review",
+        businessValidation: "Business pattern confirmed; model threshold remains a prototype assumption",
         endpoints: {
           health: "GET /health",
           model: "GET /model",
@@ -88,7 +88,7 @@ export function createInferenceServer() {
           assessedAt: new Date().toISOString(),
           caseId: caseRecord.id,
           synthetic: true,
-          businessValidation: "Pending Haitham review",
+          businessValidation: "Business pattern confirmed; model threshold remains a prototype assumption",
           ...assess(caseRecord),
         });
       } catch {

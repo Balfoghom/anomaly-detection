@@ -4,6 +4,8 @@
 
 **Purpose:** integrate the supplied synthetic AI models into the existing JavaScript/Node application for the committee demonstration.
 
+**Business input:** Haitham confirmed the expected routes for the 20 summarized cases, the cross-journey pattern, and the two approval workflows on 17 October 2026. See `BUSINESS_ASSUMPTIONS.md`.
+
 **Primary demo:** upload the cross-journey event CSV, assess every grouped case with the fitted model, and show a case that the comparator rules miss but the AI routes to specialist review.
 
 This document is the implementation source of truth for Manal and any coding assistant helping her. If the current application conflicts with this contract, preserve the model contract and adapt the application around it. Do not recreate the score in UI code.
@@ -61,7 +63,7 @@ Model version: `madar-cross-journey-rf-20261017-v1`
 - Exported threshold: `0.00038115594062715477`; the application must use the returned `modelFlagged` value instead of comparing this number itself.
 - Reproducibility seed: `20261017`.
 
-The review labels are design assumptions awaiting Haitham's business validation. The evaluation uses new records from the same synthetic generator, so the reported result is evidence that the prototype works as designed. It is not evidence of production fraud accuracy.
+Haitham confirmed that the cross-journey sequence and related signals are realistic and useful for the synthetic demonstration. The exact generated labels, model threshold, and performance figures remain prototype Data & AI assumptions. The evaluation uses new records from the same synthetic generator, so the reported result is evidence that the prototype works as designed. It is not evidence of production fraud accuracy.
 
 Held-out synthetic test results:
 
@@ -109,6 +111,18 @@ Validation requirements:
 6. Do not use the scenario name, expected result, route, or any manually entered label as a model feature.
 
 Haitham's `Madar_20_Synthetic_Test_Cases.csv` is useful for the original case-level demonstration, but its rows do not share entity IDs and it has no linked event history. Do not send it through this cross-journey model or claim that it proves cross-journey correlation.
+
+Haitham confirmed these expected handling routes for that summarized file:
+
+| Route | Cases |
+|---|---|
+| Routine processing | `TX-MAD-002`, `008`, `011`, `014`, `017`, `020` |
+| Additional verification | `TX-MAD-003`, `006`, `010`, `013`, `015`, `019` |
+| Specialist investigation | `TX-MAD-001`, `004`, `005`, `007`, `009`, `012`, `016`, `018` |
+
+These routes are display and workflow reference labels; they must never be included as model inputs.
+
+The same mapping is available in `business-reference/madar-20-expected-handling.csv`. Join it to the original summarized file by `transaction_id` for display and acceptance checks only.
 
 ## 5. Required transformation before inference
 
@@ -212,6 +226,8 @@ else                              → Standard review
 
 Keep the two flags separate on screen. The main value demonstration is that the model can flag a coordinated sequence while the comparator rules remain quiet.
 
+For user-facing wording, map `Standard review` to **Routine processing**, `Complete evidence` caused by missing or conflicting information to **Additional verification / Data Quality Issue**, and `Specialist review` to **Specialist investigation**. Preserve the raw returned route in the stored model result for traceability.
+
 ## 8. What the interface must show
 
 After a successful upload:
@@ -232,7 +248,8 @@ Recommended labels:
 - `AI model result`
 - `Comparator rule result`
 - `Proposed route`
-- `Business validation: Pending Haitham review`
+- `Business pattern: Confirmed for synthetic prototype`
+- `Model threshold: Synthetic prototype assumption`
 
 Avoid these labels:
 
@@ -310,13 +327,17 @@ When ChatGPT or another coding assistant helps with the app, provide this docume
 
 ## 13. Governance boundary
 
-The intended lifecycle is:
+The confirmed case-decision lifecycle is:
 
-`AI/rule signal → specialist investigation → authorized fraud outcome → stored feedback evidence`
+`Assessment → Specialist Review → Evidence Collection / Cross-Check → Quality Review → Detection Manager Approval → Confirmed Fraud / Error / Legitimate / Further Investigation`
 
-A confirmed case does not automatically become a business rule. After enough validated outcomes accumulate, the team may propose a new rule, feature, or retrained model. That proposal must be tested offline, versioned, reviewed by Data & AI and the business owner, and approved before activation.
+A separate confirmed indicator lifecycle is:
 
-Current business status: all cross-journey labels, thresholds, and expected routes remain pending Haitham's validation.
+`Proposed Indicator → Fraud/Risk Specialist Review → Data & AI Validation → Historical or Sandbox Testing → Business Owner Approval → Technical Activation → Monitoring`
+
+A confirmed case does not automatically become a business rule. After enough validated outcomes accumulate, the team may propose a new rule, feature, or retrained model through the indicator lifecycle.
+
+Current business status: Haitham confirmed the 20-case routes and the cross-journey pattern. Exact model thresholds, weights, and production performance remain unapproved prototype assumptions.
 
 ## 14. Required application architecture
 
@@ -437,7 +458,8 @@ For cross-journey cases, replace the old circular 0–100 risk score with a mode
 - Linked contributor count.
 - Involved journeys.
 - Returned reasons.
-- Business validation: `Pending Haitham review`.
+- Business pattern: `Confirmed for synthetic prototype`.
+- Model validation: `Synthetic threshold; production validation not performed`.
 
 Add a timestamped event timeline. For each event, display journey, event type, contributor, recorded time, relevant effective time, and relevant wage or identifier evidence. The main case must visibly show the ordered registration → wage → exclusion → SANED sequence for three contributors tied to one employer.
 
@@ -484,7 +506,7 @@ Add two model cards:
 - Version `madar-cross-journey-rf-20261017-v1`.
 - Sixteen derived cross-journey features.
 - 6,700 synthetic training histories, 1,000 calibration histories, and 700 held-out test histories.
-- Haitham validation pending.
+- Cross-journey business pattern confirmed by Haitham; exact model threshold remains a prototype assumption.
 - Output is synthetic review-pattern similarity, not fraud probability.
 
 Keep the existing human-governance flow. Add that reviewer outcomes become stored feedback evidence and do not automatically retrain a model or create a business rule.
@@ -507,13 +529,15 @@ Change the page notice to state that it is an illustrative legacy scoring config
 
 ### Risk Indicators — recommended
 
-Add these as `Proposed / pending Haitham validation`, not approved production indicators:
+Add these as `Proposed / requires indicator-governance approval`, not approved production indicators:
 
 - Coordinated registration → wage → exclusion → SANED sequence.
 - Cross-journey identifier reuse.
 - Retroactive change with cross-source conflict.
 
 The indicator page may link to the matching demonstration case. Submitting an indicator for testing must not change the fitted model or activate a rule.
+
+The existing `New Assessment` action must continue to create a new incoming or test case. It must not approve a scenario or indicator. Use a separate `Risk Indicator Governance` page or workflow for proposed indicators.
 
 ### Executive Dashboard and Monthly Business Report — optional after the required pages work
 

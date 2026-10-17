@@ -34,7 +34,8 @@ Display these fields:
 - `reasons`
 - `features`
 - `route`
-- Business validation status: **Pending Haitham review**
+- Business pattern status: **Confirmed for the synthetic prototype**
+- Model threshold status: **Prototype Data & AI assumption**
 
 Keep the underlying event timeline visible. The proof depends on shared employer and contributor IDs plus timestamps; a summary score alone does not demonstrate cross-journey correlation.
 

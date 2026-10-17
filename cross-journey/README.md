@@ -1,6 +1,6 @@
 # Madar cross-journey detection proof
 
-**Status:** working synthetic proof. Business scenario labels and thresholds remain pending Haitham's validation. This component does not replace the SANED Isolation Forest in the parent directory.
+**Status:** working synthetic proof. Haitham confirmed the business relevance of the cross-journey pattern. Exact model labels, thresholds, and production performance remain prototype Data & AI assumptions. This component does not replace the SANED Isolation Forest in the sibling directory.
 
 ## What this proves
 
@@ -18,7 +18,7 @@ The result is calculated from the event history. It is not hardcoded to the case
 
 The SANED model in the sibling `../saned-anomaly/` directory remains an unsupervised Isolation Forest for novel behavior. The cross-journey component is a supervised Random Forest trained on provisional synthetic scenario labels.
 
-This design is deliberate. A broad Isolation Forest was tested first, but legitimate high-volume activity was more globally unusual than the coordinated below-threshold sequence. A supervised pattern model is more suitable for proving detection of a specific business typology. Haitham's validation is therefore required before the labels can be treated as business-approved.
+This design is deliberate. A broad Isolation Forest was tested first, but legitimate high-volume activity was more globally unusual than the coordinated below-threshold sequence. A supervised pattern model is more suitable for proving detection of a specific business typology. Haitham confirmed the typology; Data & AI validation is still required before the fitted threshold or metrics can be treated as production evidence.
 
 The model uses 16 derived features, including journey count, event volume, linked contributors, registration/wage/exclusion/SANED counts, wage and retroactivity values, identifier reuse, conflicts, overrides, and the count and timing of completed cross-journey sequences.
 
@@ -87,6 +87,7 @@ Inference has no npm dependencies. Retraining requires the pinned Python package
 - Human specialist owns the case route
 - Final investigated outcomes are not yet stored by this component
 - No automatic conversion of a reviewed case into a rule or automatic retraining
-- Haitham's business validation remains pending
+- Cross-journey business pattern confirmed for the synthetic prototype
+- Exact model threshold and production performance remain unvalidated
 
 Any feedback loop must store authorized outcomes, accumulate evidence, propose a candidate rule or model version, evaluate it offline, and obtain governance approval before activation.

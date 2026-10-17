@@ -1,0 +1,21 @@
+transaction_id,expected_handling,business_status,synthetic
+TX-MAD-001,Specialist investigation,Confirmed by business owner,1
+TX-MAD-002,Routine processing,Confirmed by business owner,1
+TX-MAD-003,Additional verification,Confirmed by business owner,1
+TX-MAD-004,Specialist investigation,Confirmed by business owner,1
+TX-MAD-005,Specialist investigation,Confirmed by business owner,1
+TX-MAD-006,Additional verification,Confirmed by business owner,1
+TX-MAD-007,Specialist investigation,Confirmed by business owner,1
+TX-MAD-008,Routine processing,Confirmed by business owner,1
+TX-MAD-009,Specialist investigation,Confirmed by business owner,1
+TX-MAD-010,Additional verification,Confirmed by business owner,1
+TX-MAD-011,Routine processing,Confirmed by business owner,1
+TX-MAD-012,Specialist investigation,Confirmed by business owner,1
+TX-MAD-013,Additional verification,Confirmed by business owner,1
+TX-MAD-014,Routine processing,Confirmed by business owner,1
+TX-MAD-015,Additional verification,Confirmed by business owner,1
+TX-MAD-016,Specialist investigation,Confirmed by business owner,1
+TX-MAD-017,Routine processing,Confirmed by business owner,1
+TX-MAD-018,Specialist investigation,Confirmed by business owner,1
+TX-MAD-019,Additional verification,Confirmed by business owner,1
+TX-MAD-020,Routine processing,Confirmed by business owner,1
