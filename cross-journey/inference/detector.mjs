@@ -14,10 +14,35 @@ const ALLOWED_TYPES = new Set([
   "maternity",
 ]);
 
+// Named positions keep rule logic readable while preserving the model's fixed feature order.
+const FEATURE = Object.freeze({
+  distinctJourneys: 0,
+  eventCount: 1,
+  linkedContributors: 2,
+  registrations: 3,
+  wages: 4,
+  exclusions: 5,
+  claims: 6,
+  maximumWageChange: 7,
+  maximumRetroactiveDays: 8,
+  wageRecency: 9,
+  maximumIdentifierReuse: 10,
+  sourceConflicts: 11,
+  ruleOverrides: 12,
+  coordinatedChainCount: 13,
+  hasOrderedChain: 14,
+  chainSpanDays: 15,
+});
+
+/** Check that a value is a synthetic identifier with the expected namespace. */
 function validSyntheticId(value, prefix) {
   return typeof value === "string" && value.startsWith(prefix);
 }
 
+/**
+ * Search timestamps for registration → wage → exclusion → SANED in that order.
+ * The events may belong to several linked contributors within the same case.
+ */
 function findOrderedChain(events) {
   const times = Object.fromEntries(
     ["registration", "wage", "exclusion", "claim"].map((type) => [
@@ -42,6 +67,11 @@ function findOrderedChain(events) {
   return { found: false, spanDays: 30 };
 }
 
+/**
+ * Validate a connected synthetic history and calculate the model's sixteen
+ * ordered inputs. Returning null means evidence is incomplete or malformed and
+ * causes an explicit abstention rather than a fabricated low-risk result.
+ */
 export function extractFeatures(caseRecord) {
   if (
     !caseRecord ||
@@ -69,6 +99,7 @@ export function extractFeatures(caseRecord) {
     return null;
   }
 
+  // The model sees only events available inside the 30-day assessment window.
   const events = caseRecord.events.filter(
     (event) =>
       event.recordedAt <= caseRecord.asOf &&
@@ -138,6 +169,11 @@ export function extractFeatures(caseRecord) {
   return vector.every(Number.isFinite) ? vector : null;
 }
 
+/**
+ * Reproduce the exported Random Forest prediction by traversing every fitted
+ * tree and averaging its positive-class leaf value. The score represents
+ * similarity to provisional synthetic review patterns, not fraud probability.
+ */
 export function scoreVector(input) {
   if (!Array.isArray(input) || input.length !== model.features.length) {
     throw new TypeError(`Expected ${model.features.length} numeric features.`);
@@ -155,18 +191,40 @@ export function scoreVector(input) {
   return treeScores.reduce((total, value) => total + value, 0) / treeScores.length;
 }
 
+/**
+ * Evaluate the transparent comparator thresholds. These deterministic rules
+ * stay separate from the trained model so an AI-only detection remains visible.
+ */
 export function evaluateRules(vector) {
   const reasons = [];
-  if (vector[3] >= 8) reasons.push("Eight or more registrations in 30 days");
-  if (vector[6] >= 5) reasons.push("Five or more SANED requests in 30 days");
-  if (vector[7] >= 80) reasons.push("Wage increase of 80% or more");
-  if (vector[8] >= 30) reasons.push("Retroactive change of 30 days or more");
-  if (vector[10] >= 4) reasons.push("Identifier shared by four or more contributors");
-  if (vector[11] >= 2) reasons.push("Two or more cross-source conflicts");
-  if (vector[12] >= 3) reasons.push("Three or more rule overrides");
+  if (vector[FEATURE.registrations] >= 8) {
+    reasons.push("Eight or more registrations in 30 days");
+  }
+  if (vector[FEATURE.claims] >= 5) {
+    reasons.push("Five or more SANED requests in 30 days");
+  }
+  if (vector[FEATURE.maximumWageChange] >= 80) {
+    reasons.push("Wage increase of 80% or more");
+  }
+  if (vector[FEATURE.maximumRetroactiveDays] >= 30) {
+    reasons.push("Retroactive change of 30 days or more");
+  }
+  if (vector[FEATURE.maximumIdentifierReuse] >= 4) {
+    reasons.push("Identifier shared by four or more contributors");
+  }
+  if (vector[FEATURE.sourceConflicts] >= 2) {
+    reasons.push("Two or more cross-source conflicts");
+  }
+  if (vector[FEATURE.ruleOverrides] >= 3) {
+    reasons.push("Three or more rule overrides");
+  }
   return reasons;
 }
 
+/**
+ * Convert internal feature values into display evidence with synthetic
+ * reference ranges. These ranges are context, not exact model attribution.
+ */
 function contextualFeatures(vector) {
   return vector.map((internalValue, index) => {
     const recency = index === 9;
@@ -184,6 +242,11 @@ function contextualFeatures(vector) {
   });
 }
 
+/**
+ * Run the complete cross-journey assessment: validate, derive features, execute
+ * the fitted model, check comparator rules, explain the result, and propose a
+ * human-review route. It never confirms fraud or takes an adverse action.
+ */
 export function assess(caseRecord) {
   const vector = extractFeatures(caseRecord);
   if (!vector) {
@@ -211,7 +274,7 @@ export function assess(caseRecord) {
         .map((event) => event.journey),
     ),
   ];
-  const chainCount = vector[13];
+  const chainCount = vector[FEATURE.coordinatedChainCount];
   const reasons = [
     modelFlagged
       ? "The trained cross-journey model found similarity to provisional review patterns."
@@ -233,7 +296,7 @@ export function assess(caseRecord) {
     ruleFlagged: ruleReasons.length > 0,
     ruleReasons,
     involvedJourneys,
-    linkedContributorCount: vector[2],
+    linkedContributorCount: vector[FEATURE.linkedContributors],
     route: modelFlagged || ruleReasons.length ? "Specialist review" : "Standard review",
     band: modelFlagged || ruleReasons.length ? "Review" : "Typical",
     features: contextualFeatures(vector),

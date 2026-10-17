@@ -16,7 +16,7 @@ The result is calculated from the event history. It is not hardcoded to the case
 
 ## Model design
 
-The SANED model in the parent directory remains an unsupervised Isolation Forest for novel behavior. The cross-journey component is a supervised Random Forest trained on provisional synthetic scenario labels.
+The SANED model in the sibling `../saned-anomaly/` directory remains an unsupervised Isolation Forest for novel behavior. The cross-journey component is a supervised Random Forest trained on provisional synthetic scenario labels.
 
 This design is deliberate. A broad Isolation Forest was tested first, but legitimate high-volume activity was more globally unusual than the coordinated below-threshold sequence. A supervised pattern model is more suitable for proving detection of a specific business typology. Haitham's validation is therefore required before the labels can be treated as business-approved.
 
@@ -45,7 +45,7 @@ The 16 false alarms include five routine cases and eleven legitimate-growth case
 
 ## Files for Manal
 
-- `lib/detector.mjs`: direct JavaScript inference
+- `inference/detector.mjs`: direct JavaScript inference
 - `data/model.json`: exported fitted model
 - `data/demo-cases.json`: complete linked histories
 - `data/cross-journey-demo-events.csv`: self-contained event-level Data Intake upload, including assessment time

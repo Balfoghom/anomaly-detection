@@ -49,6 +49,7 @@ JOURNEYS = {
 
 
 def add_event(case, kind, days_ago, subject, rng, **extra):
+    """Append one timestamped synthetic event to a connected case history."""
     event = {
         "eventId": f"EVT-{case['id']}-{len(case['events']) + 1:03d}",
         "journey": JOURNEYS[kind],
@@ -64,6 +65,7 @@ def add_event(case, kind, days_ago, subject, rng, **extra):
 
 
 def make_case(rng, index, family="routine", split="train"):
+    """Generate one connected employer/contributor history for a scenario family."""
     case_id = f"CJ-SYN-{split}-{index:05d}"
     employer = f"EMP-SYN-{split}-{index:05d}"
     case = {
@@ -212,6 +214,7 @@ def make_case(rng, index, family="routine", split="train"):
 
 
 def ordered_chain(events):
+    """Find registration → wage → exclusion → claim in chronological order."""
     times = {
         kind: sorted(event["recordedAt"] for event in events if event["type"] == kind)
         for kind in ("registration", "wage", "exclusion", "claim")
@@ -230,6 +233,7 @@ def ordered_chain(events):
 
 
 def features(case):
+    """Convert a connected history into the model's sixteen ordered features."""
     if not case.get("employerId") or not case.get("events"):
         return None
     events = [
@@ -295,6 +299,7 @@ def features(case):
 
 
 def comparator_rules(vector):
+    """Return whether any transparent provisional threshold triggers review."""
     return (
         vector[3] >= 8
         or vector[6] >= 5
@@ -307,6 +312,7 @@ def comparator_rules(vector):
 
 
 def metric_counts(expected, predicted):
+    """Calculate binary review-class detection counts and rates."""
     tp = sum(wanted and result for wanted, result in zip(expected, predicted))
     fp = sum(not wanted and result for wanted, result in zip(expected, predicted))
     fn = sum(wanted and not result for wanted, result in zip(expected, predicted))
@@ -324,6 +330,7 @@ def metric_counts(expected, predicted):
 
 
 def generate_population(rng, split, counts):
+    """Generate a partition with disjoint synthetic entity namespaces."""
     cases = []
     index = 0
     for family, count in counts:
@@ -334,6 +341,7 @@ def generate_population(rng, split, counts):
 
 
 def write_demo_csvs(cases):
+    """Write event-level upload data and separate case-level reference metadata."""
     event_fields = [
         "case_id",
         "assessment_time",
@@ -414,6 +422,7 @@ def write_demo_csvs(cases):
 
 
 def main():
+    """Train, calibrate, evaluate, export, and generate reproducible demo data."""
     rng = np.random.default_rng(20261017)
     train_counts = [
         ("routine", 3200),

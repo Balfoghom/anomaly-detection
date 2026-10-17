@@ -5,7 +5,7 @@ The consolidated implementation requirements, CSV mapping, UI behavior, and acce
 Use the direct JavaScript module inside the application's backend when possible:
 
 ```js
-import { assess } from "./cross-journey/lib/detector.mjs";
+import { assess } from "./cross-journey/inference/detector.mjs";
 import cases from "./cross-journey/data/demo-cases.json" with { type: "json" };
 
 const result = assess(cases.find((item) => item.id === "CJ-SYN-demo-00001"));

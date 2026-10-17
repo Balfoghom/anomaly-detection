@@ -1,6 +1,6 @@
 import { writeFileSync } from "node:fs";
 import cases from "./data/demo-cases.json" with { type: "json" };
-import { assess } from "./lib/detector.mjs";
+import { assess } from "./inference/detector.mjs";
 
 const output = cases.map((caseRecord) => ({
   caseId: caseRecord.id,

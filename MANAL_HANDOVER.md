@@ -14,7 +14,7 @@ There are two separate AI models:
 
 | Capability | Location | Algorithm | Purpose |
 |---|---|---|---|
-| SANED single-journey anomaly detection | package root | Isolation Forest | Finds unusual combinations within one SANED claimant history using six features |
+| SANED single-journey anomaly detection | `saned-anomaly/` | Isolation Forest | Finds unusual combinations within one SANED claimant history using six features |
 | Cross-journey detection | `cross-journey/` | Random Forest classifier | Finds provisional review patterns across connected Employer Registration, Contribution & Wage, Benefit Payments, Retirement, and SANED events using sixteen features |
 
 The cross-journey model is the priority for the new demonstration. It does **not** replace the SANED model. The application can show them as two complementary AI capabilities.
@@ -140,7 +140,7 @@ For optional CSV values, omit the JavaScript property or set it to `undefined`; 
 Call the fitted model once for each grouped case:
 
 ```js
-import { assess } from "./cross-journey/lib/detector.mjs";
+import { assess } from "./cross-journey/inference/detector.mjs";
 
 const result = assess(caseRecord);
 ```
@@ -272,7 +272,7 @@ The integration is ready for demonstration only when these acceptance results co
 
 | File | Use |
 |---|---|
-| `cross-journey/lib/detector.mjs` | Actual JavaScript feature extraction and fitted inference |
+| `cross-journey/inference/detector.mjs` | Actual JavaScript feature extraction and fitted inference |
 | `cross-journey/data/model.json` | Fitted 180-tree model; must remain next to the module's expected path |
 | `cross-journey/data/cross-journey-demo-events.csv` | Live Data Intake upload |
 | `cross-journey/data/demo-cases.json` | Ready-made grouped records for debugging and comparison |
@@ -280,7 +280,7 @@ The integration is ready for demonstration only when these acceptance results co
 | `cross-journey/data/evaluation.json` | Synthetic evaluation evidence and model fingerprint |
 | `cross-journey/tests/` | Contract and parity checks |
 
-For the separate SANED single-journey model, use `lib/detector.mjs`, `data/model.json`, and the package-root `INTEGRATION.md`. Do not mix the SANED six-feature input with the cross-journey sixteen-feature input.
+For the separate SANED single-journey model, use `saned-anomaly/inference/detector.mjs`, `saned-anomaly/data/model.json`, and `saned-anomaly/INTEGRATION.md`. Do not mix the SANED six-feature input with the cross-journey sixteen-feature input.
 
 ## 11. Verification commands
 
@@ -325,8 +325,8 @@ The current application has an existing browser function called `assess(raw)` th
 Manal should use distinct names and keep the result types separate:
 
 ```js
-import { assess as assessSanedAnomaly } from "./anomaly-detection/lib/detector.mjs";
-import { assess as assessCrossJourney } from "./anomaly-detection/cross-journey/lib/detector.mjs";
+import { assess as assessSanedAnomaly } from "./anomaly-detection/saned-anomaly/inference/detector.mjs";
+import { assess as assessCrossJourney } from "./anomaly-detection/cross-journey/inference/detector.mjs";
 
 // Rename the current app function if it is retained for the old demonstration.
 function assessLegacySandbox(raw) {

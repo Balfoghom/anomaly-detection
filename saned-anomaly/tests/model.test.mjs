@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fixtures from '../data/parity-fixtures.json' with {type:'json'};
 import cases from '../data/cases.json' with {type:'json'};
-import {features,scoreVector,assess} from '../lib/detector.mjs';
+import {features,scoreVector,assess} from '../inference/detector.mjs';
 test('exported inference matches scikit-learn on every independent fixture',()=>{for(const f of fixtures){const x=features(f.case);x.forEach((v,i)=>assert.ok(Math.abs(v-f.features[i])<1e-9));assert.ok(Math.abs(scoreVector(x)-f.score)<1e-10);}});
 test('future recorded events cannot leak into assessment',()=>{const c=structuredClone(cases[0]);const before=features(c);c.events.push({type:'wage',subject:c.id,recordedAt:c.asOf+1,amount:900000});assert.deepEqual(features(c),before)});
 test('scenario labels and outcomes do not affect inference',()=>{const c=structuredClone(cases[2]);const before=assess(c).score;c.family='routine';c.expectedOutcome='confirmed';assert.equal(assess(c).score,before)});

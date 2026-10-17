@@ -2,8 +2,12 @@ import { createServer } from "node:http";
 import { pathToFileURL } from "node:url";
 import cases from "./data/demo-cases.json" with { type: "json" };
 import evaluation from "./data/evaluation.json" with { type: "json" };
-import { assess, model } from "./lib/detector.mjs";
+import { assess, model } from "./inference/detector.mjs";
 
+/**
+ * Build the local ID-only adapter used by the demonstration and endpoint tests.
+ * Hosted authentication, persistence, and arbitrary uploads belong to the app.
+ */
 export function createInferenceServer() {
   return createServer(async (request, response) => {
     const send = (status, data) => {

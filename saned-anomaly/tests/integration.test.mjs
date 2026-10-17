@@ -5,7 +5,7 @@ import {createInferenceServer} from '../server.mjs';
 import cases from '../data/cases.json' with {type:'json'};
 import evaluationCases from '../data/evaluation-cases.json' with {type:'json'};
 import evaluation from '../data/evaluation.json' with {type:'json'};
-import {assess,features,scoreVector,model} from '../lib/detector.mjs';
+import {assess,features,scoreVector,model} from '../inference/detector.mjs';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 test('model artifact matches the evaluation fingerprint',()=>assert.equal(createHash('sha256').update(readFileSync(new URL('../data/model.json',import.meta.url))).digest('hex'),evaluation.artifactSha256));
@@ -24,6 +24,7 @@ test('future backdated amendments cannot leak into current scoring',()=>{const c
 test('local API serves real inference and refuses arbitrary records',async t=>{
  const server=createInferenceServer();server.listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>new Promise(resolve=>server.close(resolve)));const url=`http://127.0.0.1:${server.address().port}`;
  const post=body=>fetch(url+'/assess',{method:'POST',body:JSON.stringify(body)});
+ const root=await (await fetch(url)).json();assert.equal(root.syntheticOnly,true);assert.equal(root.service,'SANED anomaly detection prototype');
  assert.equal((await fetch(url+'/health')).status,200);
  const r=await post({case_id:cases[2].id});assert.equal(r.status,200);const j=await r.json();assert.equal(j.score,assess(cases[2]).score);assert.equal(j.modelFlagged,true);assert.equal(j.ruleFlagged,false);
  assert.equal((await post({case_id:'REAL-123'})).status,404);

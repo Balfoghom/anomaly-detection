@@ -6,7 +6,7 @@ import cases from "../data/demo-cases.json" with { type: "json" };
 import evaluation from "../data/evaluation.json" with { type: "json" };
 import evaluationCases from "../data/evaluation-cases.json" with { type: "json" };
 import fixtures from "../data/parity-fixtures.json" with { type: "json" };
-import { assess, extractFeatures, model, scoreVector } from "../lib/detector.mjs";
+import { assess, extractFeatures, model, scoreVector } from "../inference/detector.mjs";
 
 test("model artifact matches its evaluation fingerprint", () => {
   const digest = createHash("sha256")
