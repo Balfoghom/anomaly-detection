@@ -6,6 +6,8 @@
 
 **Business input:** Haitham confirmed the expected routes for the 20 summarized cases, the cross-journey pattern, and the two approval workflows on 17 October 2026. See `BUSINESS_ASSUMPTIONS.md`.
 
+**Final business-review package:** use `business-review/MODEL_TECHNICAL_NOTES.md` and `business-review/THREE_DEMO_CASES.md`. These contain the requested technical summaries and three cases with actual fitted-model outputs.
+
 **Primary demo:** upload the cross-journey event CSV, assess every grouped case with the fitted model, and show a case that the comparator rules miss but the AI routes to specialist review.
 
 This document is the implementation source of truth for Manal and any coding assistant helping her. If the current application conflicts with this contract, preserve the model contract and adapt the application around it. Do not recreate the score in UI code.

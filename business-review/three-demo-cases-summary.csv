@@ -1,0 +1,4 @@
+case_id,capability,expected_handling,ai_result,rule_result,raw_route,business_display_route,score,threshold,synthetic
+SYN-demo-00000,SANED anomaly,Routine processing,Not flagged,Not triggered,Standard review,Routine processing,0.5005322058161524,0.6200281595573496,1
+SYN-demo-00001,SANED anomaly,Specialist investigation,Flagged,Triggered,Specialist review,Specialist investigation,0.6792435686865899,0.6200281595573496,1
+CJ-SYN-demo-00001,Cross-journey pattern,Specialist investigation,Flagged,Not triggered,Specialist review,Specialist investigation,1,0.00038115594062715477,1

@@ -10,6 +10,7 @@ anomaly-detection/
 ├── BUSINESS_ASSUMPTIONS.md   # Haitham's confirmed handling and governance input
 ├── MANAL_HANDOVER.md         # Application integration requirements
 ├── business-reference/       # Business labels for display and acceptance checks only
+├── business-review/          # Technical notes and three cases requested by Haitham
 ├── saned-anomaly/            # Single-journey SANED Isolation Forest
 │   ├── inference/            # JavaScript model execution
 │   ├── training/             # Reproducible Python training
@@ -38,6 +39,7 @@ The models are complementary. The cross-journey model does not replace the SANED
 - Manal and coding assistants: [`MANAL_HANDOVER.md`](MANAL_HANDOVER.md)
 - Confirmed business assumptions: [`BUSINESS_ASSUMPTIONS.md`](BUSINESS_ASSUMPTIONS.md)
 - Machine-readable 20-case routes: [`business-reference/madar-20-expected-handling.csv`](business-reference/madar-20-expected-handling.csv)
+- Haitham review package: [`business-review/README.md`](business-review/README.md)
 - SANED model details: [`saned-anomaly/README.md`](saned-anomaly/README.md)
 - Cross-journey model details: [`cross-journey/README.md`](cross-journey/README.md)
 
